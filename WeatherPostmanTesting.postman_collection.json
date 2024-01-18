@@ -1,0 +1,150 @@
+{
+	"info": {
+		"_postman_id": "a2fcc107-cd4d-4b13-844d-7584404fd01a",
+		"name": "WeatherPostmanTesting",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32291697"
+	},
+	"item": [
+		{
+			"name": "Get Weather Data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response has coord property\",function() {\r",
+							"    var jsondata = pm.response.json()\r",
+							"    pm.expect(jsondata).to.have.property('coord');\r",
+							"    pm.expect(jsondata).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response has weather property\",function() {\r",
+							"    var jsondata = pm.response.json()\r",
+							"    pm.expect(jsondata).to.have.property('weather');\r",
+							"    pm.expect(jsondata).to.be.an('object');\r",
+							"});\r",
+							"pm.test(\"Response have base property with value station\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.base).to.eql('stations');\r",
+							"    console.log(jsonData.base)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response has id property\",function() {\r",
+							"    var jsondata = pm.response.json()\r",
+							"    pm.expect(jsondata).to.have.property('id');\r",
+							"    \r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check response have property dt\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.dt).to.eql(1485789600);\r",
+							"    console.log(jsonData.dt)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check response have name property and validate\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.name).to.eql(\"London\");\r",
+							"    console.log(jsonData.name)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check response have cod property and validate\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.cod).to.eql(200);\r",
+							"    console.log(jsonData.cod)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check response have weather contain main property and validate\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.weather[0].main).to.eql(\"Drizzle\");\r",
+							"    \r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check response have weather contain description property and validate\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.weather[0].description).to.eql(\"light intensity drizzle\");\r",
+							"    \r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check response have  main contain temp property and validate\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.main.temp).to.eql(280.32);\r",
+							"    \r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check response have  clouds contain all property and validate\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.clouds.all).to.eql(90);\r",
+							"    \r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check response have wind contain speed property and validate\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.wind.speed).to.eql(4.1);\r",
+							"    \r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Base_URL}}/data/2.5/weather?q=London,uk&appid=b6907d289e10d714a6e88b30761fae22",
+					"host": [
+						"{{Base_URL}}"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"weather"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "London,uk"
+						},
+						{
+							"key": "appid",
+							"value": "b6907d289e10d714a6e88b30761fae22"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "Base_URL",
+			"value": "https://samples.openweathermap.org",
+			"type": "string"
+		}
+	]
+}
